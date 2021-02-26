@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongxian.factory.mapper.ShelvesMapper">
+
+
+    <resultMap id="selectShelvesMap" type="com.yongxian.factory.bean.GoodsshelvesBean" autoMapping="true">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="shelves_number" property="shelves_number" jdbcType="VARCHAR"/>
+        <result column="machine_number" property="machine_number" jdbcType="VARCHAR"/>
+        <result column="bin" property="bin" jdbcType="VARCHAR"/>
+        <result column="ip_address" property="ip_address" jdbcType="VARCHAR"/>
+        <result column="start_ip" property="start_ip" jdbcType="VARCHAR"/>
+        <result column="end_ip" property="end_ip" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!-- 查询货架 -->
+    <select id="selectShelves" resultMap="selectShelvesMap">
+        SELECT * FROM goodsshelves
+    </select>
+
+    <!-- 添加货架(是否符合添加货架条件) -->
+    <select id="selectShelvesRepeatShelves_number" resultMap="selectShelvesMap">
+        SELECT * FROM goodsshelves WHERE shelves_number=#{shelves_number}
+    </select>
+
+    <select id="selectShelvesRepeatIp_address" resultMap="selectShelvesMap">
+        SELECT * FROM goodsshelves WHERE ip_address=#{ip_address}
+    </select>
+
+
+    <select id="selectShelves2" resultMap="selectShelvesMap">
+        SELECT * FROM goodsshelves WHERE id=#{id}
+    </select>
+
+    <update id="updateShelves" parameterType="com.yongxian.factory.bean.GoodsshelvesBean">
+        UPDATE `yongxian`.`goodsshelves` SET `shelves_number` = #{shelves_number}, `machine_number` = #{machine_number}, `bin` = #{bin}, `ip_address` = #{ip_address}, `start_ip` = #{start_ip}, `end_ip` = #{end_ip}, `remark` = #{remark} `id` = #{id};
+    </update>
+
+
+
+</mapper>
